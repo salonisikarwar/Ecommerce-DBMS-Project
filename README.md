@@ -1,4 +1,4 @@
-# 🛒 E-commerce Database Project (MySQL)
+#  E-commerce Database Project (MySQL)
 
 This is a **complete database project** for an e-commerce platform, built using **MySQL**.  
 
