@@ -102,7 +102,6 @@ WHERE c.cust_id = 3
 GROUP BY c.cust_id;
 
 3. Use a stored procedure to get a customer's order history:
-
 CALL get_order_history(1); -- Get order history for customer with ID 1
 
 4. Check the view for total sales by product category:
