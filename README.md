@@ -1,40 +1,46 @@
-E-commerce Database Project (MySQL)
+# 🛒 E-commerce Database Project (MySQL)
 
-This project is a complete database system for an e-commerce platform, built with MySQL.
-It includes:
+This project is a **complete database system** for an e-commerce platform, built with **MySQL**.  
 
-Full database schema
+It includes:  
+- 📂 Full **database schema**  
+- 🧪 **Sample data** for testing  
+- ⚡ **Advanced features** (triggers, stored procedures)  
+- 🔍 Example **queries** to interact with the system  
 
-Sample data for testing
+---
 
-Advanced features like triggers and stored procedures
+## 🚀 How to Set Up
 
-Example queries to interact with the system
+### 📌 Prerequisites
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/)  
+- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)  
 
-🚀 How to Set Up
-📌 Prerequisites
+### ⚡ Installation Steps
+1. Clone this repository or [download the ZIP](../../archive/refs/heads/main.zip).  
+2. Open **MySQL Workbench**.  
+3. Run the SQL scripts from the [`/sql_scripts/`](./sql_scripts) folder in the following order:  
 
-MySQL Server
+   1. **[`1_Complete_Setup_MySQL.sql`](./sql_scripts/1_Complete_Setup_MySQL.sql)**  
+      ➝ Creates the database and all tables.  
 
-MySQL Workbench
+   2. **[`2_Sample_Data_MySQL.sql`](./sql_scripts/2_Sample_Data_MySQL.sql)**  
+      ➝ Populates tables with sample data.  
 
-⚡ Installation Steps
+   3. **[`3_Advanced_Features_MySQL.sql`](./sql_scripts/3_Advanced_Features_MySQL.sql)**  
+      ➝ Adds triggers and stored procedures.  
 
-Clone this repository or download the files.
+   4. **[`4_Queries_MySQL.sql`](./sql_scripts/4_Queries_MySQL.sql)**  
+      ➝ Example queries to test the database.  
 
-Open MySQL Workbench.
+---
 
-Run the SQL scripts from the /sql_scripts/ folder in the following order:
+## 🗄️ Database Schema
+The final schema includes all tables and their relationships.  
 
-1_Complete_Setup_MySQL.sql → Creates the database and all tables.
+📊 See the [`/diagrams/`](./diagrams) folder for both **conceptual** and **physical** ER diagrams.  
 
-2_Sample_Data_MySQL.sql → Populates tables with sample data.
+*(You can also embed an image directly if you want it to show inside README:)*  
 
-3_Advanced_Features_MySQL.sql → Adds triggers and stored procedures.
-
-4_Queries_MySQL.sql → Example queries to test the database.
-
-🗄️ Database Schema
-
-The final schema created includes all tables and their relationships.
-👉 See /diagrams/ folder for both conceptual and physical ER diagrams.
+```markdown
+![ER Diagram](./diagrams/physical_ER.png)
