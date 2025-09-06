@@ -85,11 +85,7 @@ You can use the queries in 4_Queries_MySQL.sql to interact with the database. He
 
 1. Find the top-rated products in the 'Electronics' category:
 
-SELECT name, price, rating, description
-FROM Product
-WHERE category_id = 1 -- Assuming 1 is the ID for Electronics
-ORDER BY rating DESC
-LIMIT 5;
+SELECT name, price, rating, description FROM Product WHERE category_id = 1 -- Assuming 1 is the ID for Electronics ORDER BY rating DESC LIMIT 5; 
 
 2. Get the total value of items in a specific customer's cart:
 
@@ -102,6 +98,7 @@ WHERE c.cust_id = 3
 GROUP BY c.cust_id;
 
 3. Use a stored procedure to get a customer's order history:
+
 CALL get_order_history(1); -- Get order history for customer with ID 1
 
 4. Check the view for total sales by product category:
