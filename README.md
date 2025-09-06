@@ -21,16 +21,16 @@ You need to have the following installed:
 1. Open **MySQL Workbench**.  
 2. Run the SQL scripts from the [`/sql_scripts/`](./sql_scripts) folder in this exact order:  
 
-   1. **1_Complete_Setup_MySQL.sql**  
+   1. **Complete_Setup_MySQL.sql**  
       ➝ Creates the database and all tables.  
 
-   2. **2_Sample_Data_MySQL.sql**  
+   2. **Sample_Data_MySQL.sql**  
       ➝ Fills the tables with sample data.  
 
-   3. **3_Advanced_Features_MySQL.sql**  
+   3. **Advanced_Features_MySQL.sql**  
       ➝ Adds the triggers and stored procedures.  
 
-   4. **4_Queries_MySQL.sql**  
+   4. **Queries_MySQL.sql**  
       ➝ Contains example queries you can run to test the database.  
 
 ---
