@@ -1,25 +1,40 @@
-E-commerce Database Project in MySQL
-This is a complete database project for an e-commerce platform, built using MySQL. It includes the full database schema, sample data to test with, and advanced features like triggers and stored procedures.
+E-commerce Database Project (MySQL)
 
-How to Set Up
-To get this project running on your local machine, follow these steps:
+This project is a complete database system for an e-commerce platform, built with MySQL.
+It includes:
 
-Prerequisites: You need to have MySQL Server and MySQL Workbench installed.
+Full database schema
 
-Run the SQL Scripts: Open MySQL Workbench and run the files from the sql_scripts folder in this exact order:
+Sample data for testing
 
-1_Complete_Setup_MySQL.sql — Creates the database and all tables.
+Advanced features like triggers and stored procedures
 
-2_Sample_Data_MySQL.sql — Fills the tables with sample data.
+Example queries to interact with the system
 
-3_Advanced_Features_MySQL.sql — Adds the triggers and stored procedures.
+🚀 How to Set Up
+📌 Prerequisites
 
-4_Queries_MySQL.sql — Contains many example queries you can run to test the database.
+MySQL Server
 
-Database Schema
-This is the final schema that is created by the setup script. It shows all the tables and how they are related.
+MySQL Workbench
 
-Folder Structure
-/sql_scripts/: Contains all the SQL files needed to build and test the database.
+⚡ Installation Steps
 
-/diagrams/: Contains the conceptual and physical ER diagrams for the project.
+Clone this repository or download the files.
+
+Open MySQL Workbench.
+
+Run the SQL scripts from the /sql_scripts/ folder in the following order:
+
+1_Complete_Setup_MySQL.sql → Creates the database and all tables.
+
+2_Sample_Data_MySQL.sql → Populates tables with sample data.
+
+3_Advanced_Features_MySQL.sql → Adds triggers and stored procedures.
+
+4_Queries_MySQL.sql → Example queries to test the database.
+
+🗄️ Database Schema
+
+The final schema created includes all tables and their relationships.
+👉 See /diagrams/ folder for both conceptual and physical ER diagrams.
