@@ -13,7 +13,7 @@ BEGIN
     WHERE cust_id = customer_id;
 END$$
 
--- 5. Stored procedure for getting order history.
+-- 2. Stored procedure for getting order history.
 DROP PROCEDURE IF EXISTS get_order_history$$
 CREATE PROCEDURE get_order_history(IN customer_id INT)
 BEGIN
@@ -23,7 +23,7 @@ BEGIN
     ORDER BY o.order_date DESC;
 END$$
 
--- 6. Stored procedure for processing an order from a customer's cart
+-- 3. Stored procedure for processing an order from a customer's cart
 DROP PROCEDURE IF EXISTS process_order_from_cart$$
 CREATE PROCEDURE process_order_from_cart(IN customer_id INT, IN customer_pin_code VARCHAR(10))
 BEGIN
@@ -60,9 +60,9 @@ BEGIN
             LEAVE cart_loop;
         END IF;
 
-        -- Check for stock and get price
+        -- Check for stock and get price. Use FOR UPDATE to lock the row and prevent race conditions.
         SELECT price, stock INTO product_price, product_stock
-        FROM Product WHERE prod_id = cart_prod_id;
+        FROM Product WHERE prod_id = cart_prod_id FOR UPDATE;
 
         IF product_stock < cart_quantity THEN
             -- Not enough stock, rollback transaction and signal an error
@@ -87,7 +87,7 @@ BEGIN
 END$$
 
 
--- 3. Trigger to update the no. of products (stock) as soon as the payment is made.
+-- 4. Trigger to update the no. of products (stock) as soon as the payment is made.
 DROP TRIGGER IF EXISTS after_payment_update_stock$$
 CREATE TRIGGER after_payment_update_stock
 AFTER UPDATE ON Payment
@@ -101,9 +101,11 @@ BEGIN
     END IF;
 END$$
 
--- 4. Trigger to update the total amount of user everytime he adds something to order_items table.
-DROP TRIGGER IF EXISTS after_order_item_insert_update_total$$
-CREATE TRIGGER after_order_item_insert_update_total
+-- 5. Triggers to keep the order total amount accurate.
+
+-- A) After INSERT on Order_items
+DROP TRIGGER IF EXISTS after_order_item_insert$$
+CREATE TRIGGER after_order_item_insert
 AFTER INSERT ON Order_items
 FOR EACH ROW
 BEGIN
@@ -112,11 +114,33 @@ BEGIN
     WHERE order_id = NEW.order_id;
 END$$
 
+-- B) After UPDATE on Order_items (Handles quantity changes)
+DROP TRIGGER IF EXISTS after_order_item_update$$
+CREATE TRIGGER after_order_item_update
+AFTER UPDATE ON Order_items
+FOR EACH ROW
+BEGIN
+    UPDATE Orders
+    SET total_amt = total_amt - (OLD.quantity * OLD.price) + (NEW.quantity * NEW.price)
+    WHERE order_id = NEW.order_id;
+END$$
+
+-- C) After DELETE on Order_items (Handles item removal)
+DROP TRIGGER IF EXISTS after_order_item_delete$$
+CREATE TRIGGER after_order_item_delete
+AFTER DELETE ON Order_items
+FOR EACH ROW
+BEGIN
+    UPDATE Orders
+    SET total_amt = total_amt - (OLD.quantity * OLD.price)
+    WHERE order_id = OLD.order_id;
+END$$
+
 
 -- Reset the delimiter back to semicolon
 DELIMITER ;
 
--- 2. View for getting sales by category of products.
+-- 6. View for getting sales by category of products.
 CREATE OR REPLACE VIEW sales_by_category AS
 SELECT
     c.name AS category_name,
@@ -127,4 +151,3 @@ JOIN Product p ON oi.prod_id = p.prod_id
 JOIN Category c ON p.category_id = c.category_id
 GROUP BY c.name
 ORDER BY total_sales_amount DESC;
-
