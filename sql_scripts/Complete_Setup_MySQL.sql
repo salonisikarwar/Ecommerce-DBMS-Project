@@ -15,6 +15,7 @@ CREATE TABLE Customer (
     address VARCHAR(255) NOT NULL,
     ph_no VARCHAR(15) UNIQUE NOT NULL,
     pin_code VARCHAR(10) NOT NULL,
+    -- NOTE: Passwords should be hashed using a strong algorithm (e.g., bcrypt) in the application layer.
     password VARCHAR(255) NOT NULL
 );
 
@@ -43,6 +44,8 @@ CREATE TABLE Product (
     seller_id INT,
     stock INT NOT NULL CHECK (stock >= 0),
     rating DECIMAL(2, 1) CHECK (rating >= 0 AND rating <= 5),
+    -- Added for soft-deletion: instead of deleting a product, set this to FALSE.
+    is_active BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (category_id) REFERENCES Category(category_id),
     FOREIGN KEY (seller_id) REFERENCES Seller(seller_id)
 );
@@ -53,7 +56,8 @@ CREATE TABLE Orders (
     cust_id INT,
     order_date DATE NOT NULL DEFAULT (CURRENT_DATE),
     total_amt DECIMAL(12, 2) NOT NULL DEFAULT 0.00,
-    status VARCHAR(50) NOT NULL DEFAULT 'Pending',
+    -- Changed to ENUM for data consistency.
+    status ENUM('Pending', 'Pending Payment', 'Processing', 'Shipped', 'Delivered', 'Cancelled') NOT NULL DEFAULT 'Pending',
     pin_code VARCHAR(10) NOT NULL,
     FOREIGN KEY (cust_id) REFERENCES Customer(cust_id)
 );
@@ -86,7 +90,8 @@ CREATE TABLE Payment (
     order_id INT,
     cust_id INT,
     mode VARCHAR(50) NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    -- Changed to ENUM for data consistency.
+    status ENUM('Pending', 'Completed', 'Failed', 'Refunded') NOT NULL,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (cust_id) REFERENCES Customer(cust_id)
 );
@@ -112,3 +117,10 @@ CREATE TABLE Wishlist (
     FOREIGN KEY (cust_id) REFERENCES Customer(cust_id),
     FOREIGN KEY (prod_id) REFERENCES Product(prod_id)
 );
+
+-- Step 4: Add Indexes for Performance
+CREATE INDEX idx_product_category ON Product(category_id);
+CREATE INDEX idx_product_seller ON Product(seller_id);
+CREATE INDEX idx_orders_customer ON Orders(cust_id);
+CREATE INDEX idx_orderitems_order ON Order_items(order_id);
+CREATE INDEX idx_orderitems_product ON Order_items(prod_id);
