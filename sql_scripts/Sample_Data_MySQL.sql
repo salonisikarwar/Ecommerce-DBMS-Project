@@ -3,17 +3,17 @@ USE ecommerce_db;
 
 -- Inserting sample data into the tables
 
--- Customers
+-- Customers (passwords are now example bcrypt hashes)
 INSERT INTO Customer (name, email, address, ph_no, pin_code, password) VALUES
-('Saurabh Kumar', 'saurabh.k@example.com', '123 Tech Avenue, Bangalore', '9876543210', '560001', 'pass123'),
-('Jane Smith', 'jane.smith@example.com', '456 Market St, Mumbai', '8765432109', '400001', 'pass456'),
-('Amit Patel', 'amit.patel@example.com', '789 Ganga Road, Delhi', '7654321098', '110001', 'pass789');
+('Saurabh Kumar', 'saurabh.k@example.com', '123 Tech Avenue, Bangalore', '9876543210', '560001', '$2a$12$E/l4M9C3A3a.PTbX.2a3b.5c6d7e8f9g0h1i2j3k4l5m6n7o8'),
+('Jane Smith', 'jane.smith@example.com', '456 Market St, Mumbai', '8765432109', '400001', '$2a$12$F/m5N0D4B4b.QUcY.3b4c.6d7e8f9g0h1i2j3k4l5m6n7o8p'),
+('Amit Patel', 'amit.patel@example.com', '789 Ganga Road, Delhi', '7654321098', '110001', '$2a$12$G/n6O1E5C5c.RVdZ.4c5d.7e8f9g0h1i2j3k4l5m6n7o8p9');
 
--- Sellers
+-- Sellers (passwords are now example bcrypt hashes)
 INSERT INTO Seller (name, email, ph_no, password) VALUES
-('ElectroHub', 'contact@electrohub.com', '6543210987', 'sellerpass1'),
-('FashionFiesta', 'support@fashion.com', '5432109876', 'sellerpass2'),
-('BookNook', 'info@booknook.com', '4321098765', 'sellerpass3');
+('ElectroHub', 'contact@electrohub.com', '6543210987', '$2a$12$H/o7P2F6D6d.SWae.5d6e.8f9g0h1i2j3k4l5m6n7o8p9q'),
+('FashionFiesta', 'support@fashion.com', '5432109876', '$2a$12$I/p8Q3G7E7e.TXbf.6e7f.9g0h1i2j3k4l5m6n7o8p9q0'),
+('BookNook', 'info@booknook.com', '4321098765', '$2a$12$J/q9R4H8F8f.UYcg.7f8g.0h1i2j3k4l5m6n7o8p9q0r');
 
 -- Categories
 INSERT INTO Category (name) VALUES
@@ -69,4 +69,3 @@ INSERT INTO Review (prod_id, cust_id, rating, comment) VALUES
 INSERT INTO Wishlist (cust_id, prod_id) VALUES
 (1, 3), -- Saurabh wants the Denim Jacket
 (2, 1); -- Jane wants the Smartwatch
-
