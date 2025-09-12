@@ -4,7 +4,7 @@ USE ecommerce_db;
 -- QUERY 1: Customers to find products with the highest ratings for a given category.
 SELECT name, price, rating, description
 FROM Product
-WHERE category_id = 1
+WHERE category_id = 1 AND is_active = TRUE
 ORDER BY rating DESC
 LIMIT 5;
 
@@ -12,7 +12,7 @@ LIMIT 5;
 SELECT p.name, p.price, p.rating, s.name AS seller_name
 FROM Product p
 JOIN Seller s ON p.seller_id = s.seller_id
-WHERE p.seller_id = 1 AND p.price < 10000.00
+WHERE p.seller_id = 1 AND p.price < 10000.00 AND p.is_active = TRUE
 ORDER BY p.price;
 
 -- QUERY 3: If a customer wants to know the total price for all products present in their cart.
@@ -28,7 +28,7 @@ GROUP BY c.cust_id;
 SELECT s.name as seller_name, p.stock, p.price
 FROM Product p
 JOIN Seller s ON p.seller_id = s.seller_id
-WHERE p.name = 'Wireless Earbuds Pro'
+WHERE p.name = 'Wireless Earbuds Pro' AND p.is_active = TRUE
 ORDER BY p.stock DESC
 LIMIT 1;
 
@@ -106,6 +106,5 @@ SELECT p.name, p.price, p.rating, r.comment, c.name as reviewer
 FROM Product p
 LEFT JOIN Review r ON p.prod_id = r.prod_id
 LEFT JOIN Customer c ON r.cust_id = c.cust_id
-WHERE p.prod_id IN (1, 2)
+WHERE p.prod_id IN (1, 2) AND p.is_active = TRUE
 ORDER BY p.name, r.rating DESC;
-
