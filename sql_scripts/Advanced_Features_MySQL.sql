@@ -1,7 +1,5 @@
--- Ensure the correct database is being used
 USE ecommerce_db;
 
--- Delimiter is changed to $$ to allow semicolons inside procedures and triggers
 DELIMITER $$
 
 -- 1. Stored procedure for the details of the customer.
