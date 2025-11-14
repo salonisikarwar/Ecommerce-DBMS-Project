@@ -1,4 +1,3 @@
--- Ensure the correct database is being used
 USE ecommerce_db;
 
 -- QUERY 1: Customers to find products with the highest ratings for a given category.
