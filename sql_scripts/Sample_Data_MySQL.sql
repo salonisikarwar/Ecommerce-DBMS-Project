@@ -1,4 +1,3 @@
--- Ensure the correct database is being used
 USE ecommerce_db;
 
 -- Inserting sample data into the tables
