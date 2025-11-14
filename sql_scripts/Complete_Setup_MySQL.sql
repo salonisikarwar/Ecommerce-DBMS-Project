@@ -1,11 +1,8 @@
--- Step 1: Create the database (if it doesn't exist)
 DROP DATABASE IF EXISTS ecommerce_db;
 CREATE DATABASE ecommerce_db;
 
--- Step 2: Select the database to use for all subsequent commands
 USE ecommerce_db;
 
--- Step 3: Create all the tables
 
 -- Table: Customer
 CREATE TABLE Customer (
@@ -118,7 +115,7 @@ CREATE TABLE Wishlist (
     FOREIGN KEY (prod_id) REFERENCES Product(prod_id)
 );
 
--- Step 4: Add Indexes for Performance
+--  Add Indexes for Performance
 CREATE INDEX idx_product_category ON Product(category_id);
 CREATE INDEX idx_product_seller ON Product(seller_id);
 CREATE INDEX idx_orders_customer ON Orders(cust_id);
